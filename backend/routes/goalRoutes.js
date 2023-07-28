@@ -6,6 +6,7 @@ const {
     setGoals,
     updateGoals,
     deleteGoals
+    
 } = require('../controller/goalController');
 
 router.get('/', getGoals);
