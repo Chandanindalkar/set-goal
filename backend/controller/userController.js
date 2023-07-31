@@ -41,7 +41,25 @@ const registerUser = asyncHandler(async (req, res) => {
 })
 
 const loginUser = asyncHandler(async (req, res) => {
-    res.json({message: 'Login User'})
+    //destructure user input data
+    const {email, password } = req.body
+
+    // Check if user exists
+    const user = await User.findOne({email})
+
+    // first condition passes if user exists
+    // second condition checks user input password with cipher
+    if (user && (await bcrypt.compare(password, user.password))) {
+        res.json({
+            _id: user.id,
+            name: user.name,
+            email: user.email
+        })
+        
+    } else {
+        res.status(400)
+        throw new Error('Wrong email or password')
+    }
 })
 
 const getMe = asyncHandler(async (req, res) => {
