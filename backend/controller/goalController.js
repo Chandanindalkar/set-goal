@@ -1,3 +1,5 @@
+// Simple middleware for handling exceptions inside of 
+// async express routes and passing them to your express error handlers.
 const asyncHandler = require('express-async-handler')
 const Goal = require('../models/goalModel')
 

@@ -10,6 +10,7 @@ connectDB()
 const app = express();
 
 const goalRoutes = require('./routes/goalRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 app.use(express.json()) //body parser
 app.use(express.urlencoded({extended: false}))
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/goals', goalRoutes);
+app.use('/api/users', userRoutes);
 
 app.use(errorHandler)
 
