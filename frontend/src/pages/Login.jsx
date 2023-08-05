@@ -23,6 +23,18 @@ function Login() {
     (state) => state.auth
   )
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess || user) {
+      navigate('/')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
   const onChange = (e) => { // e = event
     setFormData((prevState) => ({
       ...prevState,
@@ -32,8 +44,18 @@ function Login() {
   
   const onSubmit = (e) => {
     e.preventDefault()
-    console.log(formData)
+
+    const userData = {
+      email,
+      password,
+    }
+
+    dispatch(login(userData))
     
+  }
+
+  if (isLoading) {
+    return <Spinner />
   }
 
   return (
