@@ -12,15 +12,15 @@ const getGoals = asyncHandler(async(req, res) => {
 })
 
 const setGoals = asyncHandler(async(req, res) => {
-    if (!req.body.message) {
+    if (!req.body.text) {
         res.status(400)
-        throw new Error('please add message in body')
+        throw new Error('please add text in body')
     }
 
-    console.log(req.body.message)
+    console.log(req.body.text)
 
     const goal = await Goal.create({
-        "message": req.body.message,
+        "text": req.body.text,
         user: req.user.id,
     });
 
